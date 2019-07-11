@@ -21,7 +21,7 @@ class App extends React.Component {
 
 		this.state = {
 			search: '',
-			searchSmall: false
+			searchSmall: true
 		};
 	}
 

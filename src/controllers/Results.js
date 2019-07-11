@@ -21,8 +21,6 @@ const StyledCol = styled(Col)`
 `;
 
 const StyledCategory = styled(Category)`
-	/* margin-left: 16px;
-	margin-right: 16px; */
 	margin-top: 50px;
 	width: 370px;
 	height: 500px;
@@ -30,7 +28,7 @@ const StyledCategory = styled(Category)`
 
 const StyledCard = styled(Card)`
 	width: 100%;
-	height: 175px;
+	height: 150px;
 	margin: 15px;
 	margin-top: 30px;
 `;
@@ -68,7 +66,7 @@ class Results extends React.Component {
 					<StyledCard>
 						<CardHeader><b>Political Spectrum</b></CardHeader>
 						<StyledCardBody>
-							<BubbleChart />
+							<BubbleChart data={this.fakeData.results} />
 						</StyledCardBody>
 					</StyledCard>
 				</Row>

@@ -18,39 +18,30 @@ const data01 = [
 ];
 
 class BubbleChart extends React.Component {
-	_parseDomain = () => {
-		return [-15,115];
-	};
+	constructor(props) {
+		super(props);
 
-	// _renderTooltip = () => {
-	// 	const { active, payload } = this.props;
-
-	// 	if (active && payload && payload.length) {
-	// 		const data = payload[0].payload;
-
-	// 		return (
-	// 			<div style={{ backgroundColor: '#fff', border: '1px solid #999', margin: 0, padding: 10 }}>
-	// 				<p>{data.hour}</p>
-	// 				<p><span>value: </span>{data.value}</p>
-	// 			</div>
-	// 		);
-	// 	}
-
-	// 	return null;
-	// }
+		this.data = this.props.data.map(data => {
+			return {
+				title: data.headline,
+				value: data.poli * 100,
+				r: 100
+			};
+		});
+	}
 
 	render() {
-		const domain = [-15,115];
+		const domain = [0, 100];
 		const range = [0, 200];
 
 		return (
 			<div>
-				<ScatterChart width={1100} height={60} margin={{ top: 10, right: 0, bottom: 0, left: 0 }}>
+				<ScatterChart width={1100} height={20} margin={{ top: 10, right: 0, bottom: 0, left: 0 }}>
 					<YAxis type="number" dataKey="r" tick={false} tickLine={false} axisLine={false} />
 					<XAxis type="number" dataKey="value" height={10} width={80} tick={false} tickLine={false} />
 					<ZAxis type="number" dataKey="r" domain={domain} range={range} />
 					<Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this._renderTooltip} />
-					<Scatter data={data01} fill='#8884d8' />
+					<Scatter data={this.data} />
 				</ScatterChart>
 			</div>
 		);
