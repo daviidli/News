@@ -1,26 +1,50 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import styled from 'styled-components';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "bootstrap/dist/css/bootstrap.min.css";
+import "shards-ui/dist/css/shards.min.css"
+import Search from './components/Search';
+import Results from './controllers/Results';
+
+const SearchContainer = styled.div`
+	height: ${ window.innerHeight.toString() + 'px' };
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+`;
+
+class App extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			search: '',
+			searchSmall: false
+		};
+	}
+
+	search = (search) => {
+		this.setState({ search, searchSmall: search === '' });
+	}
+
+	_results = () => {
+		if (this.state.searchSmall) {
+			return null;
+		}
+
+		return <Results />;
+	}
+
+	render() {
+		return (
+			<SearchContainer>
+				<Search onSearch={this.search} />
+				{ this._results() }
+			</SearchContainer>
+		);
+	}
 }
 
 export default App;
