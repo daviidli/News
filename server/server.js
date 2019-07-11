@@ -1,16 +1,14 @@
 let request = require('request-promise');
 let express = require('express');
 let bodyParser = require('body-parser');
-let numResults=60;
-const link = 'https://newsapi.org/v2/everything?q='+ 'Brexit' +'&pageSize='+numResults+ '&apiKey=f4c9cef82d2745cf955c392b9e6284c1'
 let app = express();
-
 let jsonParser = bodyParser.json();
-app.use(bodyParser.urlencoded({extended:false}))
 
 //helper for getting the request
 async function everythingContent(phrase){ 
     let listOfUrls;
+    let numResults=60;
+    let link = 'https://newsapi.org/v2/everything?q='+ 'Brexit' +'&pageSize='+numResults+ '&apiKey=f4c9cef82d2745cf955c392b9e6284c1'
     await request({url:link, json:true}, function(err, res, json){
         if(err){
             throw err;
@@ -36,13 +34,7 @@ function addUrlList(cont){
     return listUrl;
 }
 
-app.get("/urls", async function(request, response){
-    
-    let valList = await everythingContent('Brexit');
-});
-
-
-// post the results
+// get the analysis results
 async function getAnalysis(urls, phrase){
     let analysis = await request.post(
         {
