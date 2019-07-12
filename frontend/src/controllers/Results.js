@@ -114,7 +114,7 @@ class Results extends React.Component {
 										<StyledCategory
 											header={category}
 											key={category}
-											items={this.props.data.results.filter(data => data.group === i)}
+											items={this.props.data.filter(data => data.group === i)}
 											selected={this.state.selected}
 											ref={ref => { this.ref[i] = ref; }}
 											waiting={this.props.waiting}

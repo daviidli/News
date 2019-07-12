@@ -32,10 +32,16 @@ class App extends React.Component {
 		};
 	}
 
-	search = async (search) => {
-		let res = await axios.post(config['backend-url'] + '/search', {"search": search})
-		console.log(res)
-		this.setState({ search, searchSmall: search === '', data: res.data });
+	search = (search) => {
+		this.setState({ search, searchSmall: search === '' });
+		this._runSearch(search);
+	}
+
+	_runSearch = (search) => {
+		axios.post(config['backend-url'] + '/search', {"search": search}).then(res => {
+			const data = res.data.results === undefined ? [] : res.data.results;
+			this.setState({ data: data });
+		});
 	}
 
 	_results = () => {
