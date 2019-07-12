@@ -10,6 +10,7 @@ import config from './config/config.json'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { css } from 'glamor';
+import logo from '../src/logo.svg';
 
 const SearchContainer = styled.div`
 	height: ${ window.innerHeight.toString() + 'px' };
@@ -22,6 +23,19 @@ const SearchContainer = styled.div`
 // const StyledResults = styled(Results)`
 	/* padding-top: -20px; */
 // `;
+
+const ImageContainer = styled.img`
+	height: 200px;
+	width: 200px;
+	object-fit: cover;
+	/* top: 200px; */
+	/* margin-bottom: -100px; */
+`;
+
+const CC = styled.div`
+	margin-top: 250px;
+	margin-bottom: -400px;
+`;
 
 class App extends React.Component {
 	constructor(props) {
@@ -87,6 +101,19 @@ class App extends React.Component {
 		return <Results data={this.state.data} waiting={this.state.waiting} trend={this.state.trend} />;
 	}
 
+	_renderHeader = () => {
+		if (!this.state.searchSmall) {
+			return null;
+		}
+
+		return (
+<CC>
+<ImageContainer src={logo} />
+			<h2>InformMi</h2>
+</CC>
+		);
+	}
+
 	render() {
 		return (
 			<SearchContainer>
@@ -102,6 +129,7 @@ class App extends React.Component {
 			pauseOnHover
 			/>
 			<ToastContainer />
+				{ this._renderHeader() }
 				<Search onSearch={this.search} center={this.state.searchSmall} />
 				{ this._results() }
 			</SearchContainer>

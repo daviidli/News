@@ -101,7 +101,7 @@ class LineChartComp extends React.Component {
 				<YAxis tickCount={2} />
 				{/* <CartesianGrid strokeDasharray="3 3" /> */}
 				{/* <Legend /> */}
-				<Area type="monotone" dataKey="value" stroke={'rgba(231, 76, 60,1.0)'} fill='rgba(231, 76, 60,0.3)' strokeWidth={2} activeDot={{ r: 4 }} />
+				<Area type="monotone" dataKey="value" stroke={'rgba(241, 196, 15,1.0)'} fill='rgba(241, 196, 15,0.3)' strokeWidth={2} activeDot={{ r: 4 }} />
 				{/* <Area type="monotone" dataKey="Neutral" stroke={colors.neutral} fill='rgb(181,108,210, 0.3)' strokeWidth={2} activeDot={{ r: 4 }} />
 				<Area type="monotone" dataKey="Against" stroke={colors.against} fill='rgb(255,98,164, 0.3)' strokeWidth={2} activeDot={{ r: 4 }} /> */}
 			</AreaChart>

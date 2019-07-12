@@ -48,7 +48,7 @@ const StyledHeaders = styled(CardHeader)`
 `;
 
 const StyledHeaders1 = styled(CardHeader)`
-	background-color: rgba(231, 76, 60, 1.0);
+	background-color: rgba(241, 196, 15,1.0);
 `;
 
 class Results extends React.Component {
