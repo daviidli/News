@@ -10,8 +10,6 @@ import config from './config/config.json'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { css } from 'glamor';
-import googleTrends from 'google-trends-api';
-import HttpsProxyAgent from 'https-proxy-agent';
 
 const SearchContainer = styled.div`
 	height: ${ window.innerHeight.toString() + 'px' };
@@ -36,17 +34,33 @@ class App extends React.Component {
 			waiting: false
 		};
 
-		this.proxyAgent =  new HttpsProxyAgent('http://proxy-host:8888/');
 	}
 
 	search = (search) => {
 		this.setState({ search, searchSmall: search === '', waiting: true, data: [] });
 
-		// this._runSearch(search);
-		this._runTrends(search);
+		this._runSearch(search);
+	
 	}
 
 	_runSearch = (search) => {
+		toast.info('Searching for articles', {
+			position: "top-right",
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true
+		});
+		toast.success('Running AI algorithm', {
+			position: "top-right",
+			delay: 3000,
+			autoClose: 9000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true
+});
 		axios.post(config['backend-url'] + '/search', {"search": search}).then(res => {
 			const data = res.data.results === undefined ? [] : res.data.results;
 			let num_results = res.data.results.length
@@ -64,13 +78,6 @@ class App extends React.Component {
 
 			this.setState({ data: data, waiting: false });
 		});
-	}
-
-	_runTrends = (search) => {
-		googleTrends.interestOverTime({keyword: search, agent: this.proxyAgent})
-			.then(results => {
-				console.log('These results are awesome', results);
-			});
 	}
 
 	_results = () => {
