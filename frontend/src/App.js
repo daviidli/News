@@ -57,25 +57,28 @@ class App extends React.Component {
 	}
 
 	_runSearch = (search) => {
-		toast.info('Searching for articles', {
-			position: "top-right",
-			autoClose: 3000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true
-		});
-		toast.success('Running AI algorithm', {
-			position: "top-right",
-			delay: 3000,
-			autoClose: 9000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true
-});
+		if (search !== '') {
+			toast.info('Searching for articles', {
+				position: "top-right",
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true
+			});
+			toast.success('Running AI algorithm', {
+				position: "top-right",
+				delay: 3000,
+				autoClose: 9000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true
+			});
+		}
 		axios.post(config['backend-url'] + '/search', {"search": search}).then(res => {
 			const data = res.data.results === undefined ? [] : res.data.results;
+			console.log(data);
 			let num_results = res.data.results.length
 			toast('Found ' + num_results.toString() + " articles!", {
 				position: "top-right",
