@@ -1,12 +1,13 @@
 import React from 'react';
 import { InputGroup, FormInput, InputGroupAddon, Button } from 'shards-react';
 import styled from 'styled-components';
+
 import colors from '../colors';
 
 const Group = styled(InputGroup)`
 	width: 80%;
-	/* top: ${props => props.center ? (window.innerHeight / 2 - 50) + 'px' : '40px'}; */
-	/* transition: top 0.7s ease; */
+	top: ${props => props.center ? (window.innerHeight / 2 - 50) + 'px' : '20px'};
+	transition: top 500ms ease;
 	margin-top: 50px;
 `;
 
@@ -30,6 +31,7 @@ const StyledSearch = styled(FormInput)`
 	color: ${colors.font};
 */
 	border: 1px solid #ddd;
+	z-index: 10;
 
 	:focus {
 		/* background-color: ${colors.searchHighlight}; */

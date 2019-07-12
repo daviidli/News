@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Row, Col, Card, CardHeader, CardBody } from 'shards-react';
+import { Row, Col, Card, CardHeader, CardBody, Fade } from 'shards-react';
 
 import Category from '../components/Category';
 import fakeData from '../fakeData';
@@ -10,10 +10,7 @@ import colors from '../colors';
 import LineChartComp from '../components/LineChart';
 
 const Container = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-	align-items: flex-start;
+	margin-top: 20px;
 `;
 
 const StyledCol = styled(Col)`
@@ -58,10 +55,15 @@ class Results extends React.Component {
 		this.fakeData = fakeData;
 
 		this.state = {
-			selected: ''
+			selected: '',
+			fade: false
 		};
 
 		this.ref = [];
+	}
+
+	componentDidMount() {
+		this.setState({ fade: true });
 	}
 
 	setSelected = (selected, group) => {
@@ -74,41 +76,47 @@ class Results extends React.Component {
 
 	render() {
 		return (
-			<div className={this.props.className}>
+			<Container className={this.props.className}>
 				<Row>
 					{
 						['For', 'Neutral', 'Against'].map((category, i) => {
 							return (
-								<StyledCol>
-									<StyledCategory
-										header={category}
-										key={category}
-										items={this.fakeData.results.filter(data => data.group === i)}
-										selected={this.state.selected}
-										ref={ref => { this.ref[i] = ref; }}
-									/>
-								</StyledCol>
+								<Fade in={this.state.fade} key={category} timeout={300 + (250 * i)}>
+									<StyledCol key={category}>
+										<StyledCategory
+											header={category}
+											key={category}
+											items={this.fakeData.results.filter(data => data.group === i)}
+											selected={this.state.selected}
+											ref={ref => { this.ref[i] = ref; }}
+										/>
+									</StyledCol>
+								</Fade>
 							);
 						})
 					}
 				</Row>
 				<Row>
-					<StyledCard>
-						<StyledHeaders><b>Political Spectrum</b></StyledHeaders>
-						<StyledCardBody>
-							<BubbleChart data={this.fakeData.results} setSelected={this.setSelected} />
-						</StyledCardBody>
-					</StyledCard>
+					<Fade in={this.state.fade} timeout={1200}>
+						<StyledCard>
+							<StyledHeaders><b>Political Spectrum</b></StyledHeaders>
+							<StyledCardBody>
+								<BubbleChart data={this.fakeData.results} setSelected={this.setSelected} />
+							</StyledCardBody>
+						</StyledCard>
+					</Fade>
 				</Row>
 				<Row>
-					<LineCard>
-						<CardHeader><b>Historic Trends</b></CardHeader>
-						<StyledCardBody>
-							<LineChartComp />
-						</StyledCardBody>
-					</LineCard>
+					<Fade in={this.state.fade} timeout={1800}>
+						<LineCard>
+							<CardHeader><b>Historic Trends</b></CardHeader>
+							<StyledCardBody>
+								<LineChartComp />
+							</StyledCardBody>
+						</LineCard>
+					</Fade>
 				</Row>
-			</div>
+			</Container>
 		)
 	}
 }

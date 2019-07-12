@@ -16,9 +16,9 @@ const SearchContainer = styled.div`
 	align-items: center;
 `;
 
-const StyledResults = styled(Results)`
+// const StyledResults = styled(Results)`
 	/* padding-top: -20px; */
-`;
+// `;
 
 class App extends React.Component {
 	constructor(props) {
@@ -40,7 +40,7 @@ class App extends React.Component {
 			return null;
 		}
 
-		return <StyledResults />;
+		return <Results />;
 	}
 
 	render() {
