@@ -7,15 +7,12 @@ import "shards-ui/dist/css/shards.min.css"
 import Search from './components/Search';
 import Results from './controllers/Results';
 import config from './config/config.json'
-<<<<<<< Updated upstream
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { css } from 'glamor';
-=======
 import googleTrends from 'google-trends-api';
 import HttpsProxyAgent from 'https-proxy-agent';
 
->>>>>>> Stashed changes
 const SearchContainer = styled.div`
 	height: ${ window.innerHeight.toString() + 'px' };
 	display: flex;
