@@ -11,8 +11,12 @@ const SearchContainer = styled.div`
 	height: ${ window.innerHeight.toString() + 'px' };
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
+`;
+
+const StyledResults = styled(Results)`
+	/* padding-top: -20px; */
 `;
 
 class App extends React.Component {
@@ -34,13 +38,13 @@ class App extends React.Component {
 			return null;
 		}
 
-		return <Results />;
+		return <StyledResults />;
 	}
 
 	render() {
 		return (
 			<SearchContainer>
-				<Search onSearch={this.search} />
+				<Search onSearch={this.search} center={this.state.searchSmall} />
 				{ this._results() }
 			</SearchContainer>
 		);

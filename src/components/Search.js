@@ -1,16 +1,52 @@
 import React from 'react';
 import { InputGroup, FormInput, InputGroupAddon, Button } from 'shards-react';
 import styled from 'styled-components';
-
-import "bootstrap/dist/css/bootstrap.min.css";
-import "shards-ui/dist/css/shards.min.css"
+import colors from '../colors';
 
 const Group = styled(InputGroup)`
-	width: 70%;
+	width: 80%;
+	/* top: ${props => props.center ? (window.innerHeight / 2 - 50) + 'px' : '40px'}; */
+	/* transition: top 0.7s ease; */
+	margin-top: 50px;
 `;
 
 const SearchButton = styled(Button)`
 	width: 190px;
+	/* background-color: #424242;
+	box-shadow: 0 0 0 0 #000;
+	border: 0 solid #fff;
+
+	:hover {
+		background-color: #767676;
+	}
+
+	:active {
+		background-color: #121212 !important;
+	} */
+`;
+
+const StyledSearch = styled(FormInput)`
+	/* background-color: ${colors.search};
+	color: ${colors.font};
+*/
+	border: 1px solid #ddd;
+
+	:focus {
+		/* background-color: ${colors.searchHighlight}; */
+		/* color: ${colors.font}; */
+		box-shadow: 0 0 0 0 #fff;
+		border: 1px solid #999;
+
+		:hover {
+			box-shadow: 0 0 0 0 #fff;
+			border: 1px solid #666;
+		}
+	}
+
+	:hover {
+		box-shadow: 0 0 0 0 #fff;
+		border: 1px solid #aaa;
+	}
 `;
 
 class Search extends React.Component {
@@ -40,8 +76,8 @@ class Search extends React.Component {
 
 	render() {
 		return (
-			<Group>
-				<FormInput
+			<Group center={this.props.center}>
+				<StyledSearch
 					size="lg"
 					placeholder="Search..."
 					value={this.state.searchQuery}
@@ -49,7 +85,7 @@ class Search extends React.Component {
 					onKeyDown={this._onKeyDown}
 				/>
 				<InputGroupAddon type="append">
-					<SearchButton onClick={this._handleSearch}>Search</SearchButton>
+					<SearchButton theme='dark' onClick={this._handleSearch}>Search</SearchButton>
 				</InputGroupAddon>
 			</Group>
 		);
