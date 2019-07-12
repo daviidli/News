@@ -21,7 +21,7 @@ const server = http.createServer(app);
 let request = require('request-promise');
 let bodyParser = require('body-parser');
 let jsonParser = bodyParser.json();
-
+const googleTrends = require('google-trends-api');
 // CORS
 app.use(function(req, res, next) {
     let origins = ['localhost', "http://localhost:3000", "localhost:3000"]
@@ -108,6 +108,8 @@ app.post("/search", jsonParser, async function(request, response){
     let analysis = await getAnalysis(valList,phrase);
     console.log("ANALYSIS")
     console.log(analysis)
+    let trends = await googleTrends.interestOverTime({keyword: phrase})
+    analysis.trends = trends
     return response.send(analysis);
 });
 

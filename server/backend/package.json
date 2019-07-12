@@ -28,6 +28,7 @@
     "appmetrics-zipkin": "^1.1.1",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "google-trends-api": "^4.9.0",
     "ibm-cloud-env": "^0",
     "log4js": "^4.0.2",
     "request": "^2.88.0",
