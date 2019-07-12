@@ -1,0 +1,4 @@
+applications:
+  - name: MLPython
+    random-route: true
+    memory: 256MB
