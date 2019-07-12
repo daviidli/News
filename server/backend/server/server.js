@@ -26,7 +26,7 @@ let jsonParser = bodyParser.json();
 async function everythingContent(phrase){ 
     let listOfUrls;
     let numResults=60;
-    let link = 'https://newsapi.org/v2/everything?q='+ 'Brexit' +'&pageSize='+numResults+ '&apiKey=f4c9cef82d2745cf955c392b9e6284c1'
+    let link = 'https://newsapi.org/v2/everything?q='+ phrase +'&pageSize='+numResults+ '&apiKey=f4c9cef82d2745cf955c392b9e6284c1'
     await request({url:link, json:true}, function(err, res, json){
         if(err){
             throw err;
@@ -66,7 +66,7 @@ let valList = await everythingContent("Brexit");
 async function getAnalysis(urlSrc, phrase){
     let analysis = await request.post(
         {
-            url:"https://bcd633f7.ngrok.io/analysis", 
+            url:"https://ml-ibmhackathon.herokuapp.com/analysis", 
             json:true,
             body:{'urls': urlSrc, 'searchterm':phrase}, 
             headers:{'Content-Type': 'application/json'}
