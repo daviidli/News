@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
 import styled from 'styled-components';
-
+import axios from 'axios'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
 import Search from './components/Search';
 import Results from './controllers/Results';
+import config from './config/config.json'
 
 const SearchContainer = styled.div`
 	height: ${ window.innerHeight.toString() + 'px' };
@@ -29,7 +30,8 @@ class App extends React.Component {
 		};
 	}
 
-	search = (search) => {
+	search = async (search) => {
+		// let res = await axios.post(config['backend-url'], {"search": search})
 		this.setState({ search, searchSmall: search === '' });
 	}
 
