@@ -7,7 +7,9 @@ import "shards-ui/dist/css/shards.min.css"
 import Search from './components/Search';
 import Results from './controllers/Results';
 import config from './config/config.json'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { css } from 'glamor';
 const SearchContainer = styled.div`
 	height: ${ window.innerHeight.toString() + 'px' };
 	display: flex;
@@ -40,6 +42,19 @@ class App extends React.Component {
 	_runSearch = (search) => {
 		axios.post(config['backend-url'] + '/search', {"search": search}).then(res => {
 			const data = res.data.results === undefined ? [] : res.data.results;
+			let num_results = res.data.results.length
+			toast('Found ' + num_results.toString() + " articles!", {
+				position: "top-right",
+				bodyClassName: css({
+			    color: 'black'
+			  }),
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true
+				});
+
 			this.setState({ data: data, waiting: false });
 		});
 	}
@@ -55,6 +70,18 @@ class App extends React.Component {
 	render() {
 		return (
 			<SearchContainer>
+			<ToastContainer
+			position="top-right"
+			autoClose={5000}
+			hideProgressBar={false}
+			newestOnTop={false}
+			closeOnClick
+			rtl={false}
+			pauseOnVisibilityChange
+			draggable
+			pauseOnHover
+			/>
+			<ToastContainer />
 				<Search onSearch={this.search} center={this.state.searchSmall} />
 				{ this._results() }
 			</SearchContainer>
