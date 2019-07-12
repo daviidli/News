@@ -11,16 +11,26 @@ class LineChartComp extends React.Component {
 
 		const now = moment();
 
-		this.data = (new Array(14).fill(0)).map((v, i) => {
-			const current = now.subtract(i, 'days').format('YYYY-MM-DD');
+		// this.data = (new Array(14).fill(0)).map((v, i) => {
+		// 	const current = now.subtract(i, 'days').format('YYYY-MM-DD');
 
+		// 	return {
+		// 		date: current,
+		// 		For: Math.floor(Math.random() * 100),
+		// 		Neutral: Math.floor(Math.random() * 100),
+		// 		Against: Math.floor(Math.random() * 100)
+		// 	};
+		// }).reverse();
+		const length = this.props.trend.length;
+
+		this.data = this.props.trend.map(data => {
 			return {
-				date: current,
-				For: Math.floor(Math.random() * 100),
-				Neutral: Math.floor(Math.random() * 100),
-				Against: Math.floor(Math.random() * 100)
+				date: data.formattedAxisTime,
+				value: data.value[0]
 			};
-		}).reverse();
+		}).slice(length - 60, length);
+
+		console.log(this.data);
 
 		// this.data = [
 		// 	{
@@ -91,9 +101,9 @@ class LineChartComp extends React.Component {
 				<YAxis tickCount={2} />
 				{/* <CartesianGrid strokeDasharray="3 3" /> */}
 				{/* <Legend /> */}
-				<Area type="monotone" dataKey="For" stroke={colors.for} fill='rgb(106,118,255, 0.3)' strokeWidth={2} activeDot={{ r: 4 }} />
-				<Area type="monotone" dataKey="Neutral" stroke={colors.neutral} fill='rgb(181,108,210, 0.3)' strokeWidth={2} activeDot={{ r: 4 }} />
-				<Area type="monotone" dataKey="Against" stroke={colors.against} fill='rgb(255,98,164, 0.3)' strokeWidth={2} activeDot={{ r: 4 }} />
+				<Area type="monotone" dataKey="value" stroke={'rgba(231, 76, 60,1.0)'} fill='rgba(231, 76, 60,0.3)' strokeWidth={2} activeDot={{ r: 4 }} />
+				{/* <Area type="monotone" dataKey="Neutral" stroke={colors.neutral} fill='rgb(181,108,210, 0.3)' strokeWidth={2} activeDot={{ r: 4 }} />
+				<Area type="monotone" dataKey="Against" stroke={colors.against} fill='rgb(255,98,164, 0.3)' strokeWidth={2} activeDot={{ r: 4 }} /> */}
 			</AreaChart>
 		);
 	}

@@ -31,16 +31,15 @@ class App extends React.Component {
 			search: '',
 			searchSmall: true,
 			data: [],
-			waiting: false
+			waiting: false,
+			trend: []
 		};
-
 	}
 
 	search = (search) => {
-		this.setState({ search, searchSmall: search === '', waiting: true, data: [] });
+		this.setState({ search, searchSmall: search === '', waiting: true, data: [], trend: [] });
 
 		this._runSearch(search);
-	
 	}
 
 	_runSearch = (search) => {
@@ -67,16 +66,16 @@ class App extends React.Component {
 			toast('Found ' + num_results.toString() + " articles!", {
 				position: "top-right",
 				bodyClassName: css({
-			    color: 'black'
-			  }),
-				autoClose: 5000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true
+					color: 'black'
+				}),
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true
 				});
 
-			this.setState({ data: data, waiting: false });
+			this.setState({ data: data, waiting: false, trend: JSON.parse(res.data.trends).default.timelineData });
 		});
 	}
 
@@ -85,7 +84,7 @@ class App extends React.Component {
 			return null;
 		}
 
-		return <Results data={this.state.data} waiting={this.state.waiting} />;
+		return <Results data={this.state.data} waiting={this.state.waiting} trend={this.state.trend} />;
 	}
 
 	render() {

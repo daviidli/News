@@ -47,6 +47,10 @@ const StyledHeaders = styled(CardHeader)`
 	color: #fff;
 `;
 
+const StyledHeaders1 = styled(CardHeader)`
+	background-color: rgba(231, 76, 60, 1.0);
+`;
+
 class Results extends React.Component {
 	constructor(props) {
 		super(props);
@@ -88,9 +92,9 @@ class Results extends React.Component {
 					<Row>
 						<Fade in={this.state.fade} timeout={1800}>
 							<LineCard>
-								<CardHeader><b>Historic Trends</b></CardHeader>
+								<StyledHeaders1><b>Historic Trends</b></StyledHeaders1>
 								<StyledCardBody>
-									<LineChartComp />
+									<LineChartComp trend={this.props.trend} />
 								</StyledCardBody>
 							</LineCard>
 						</Fade>
