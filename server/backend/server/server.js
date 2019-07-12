@@ -24,7 +24,7 @@ let jsonParser = bodyParser.json();
 const googleTrends = require('google-trends-api');
 // CORS
 app.use(function(req, res, next) {
-    let origins = ['localhost', "http://localhost:3000", "localhost:3000"]
+    let origins = ['localhost', "http://localhost:3000", "localhost:3000", "daviidli.github.io/News", "daviidli.github.io", "https://daviidli.github.io/News", "http://daviidli.github.io/News", "http://daviidli.github.io", "https://daviidli.github.io"]
 
     if (req.headers.origin) {
         for (let i = 0; i < origins.length; i++) {
