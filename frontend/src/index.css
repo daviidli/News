@@ -7,6 +7,8 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	background-color: #fff !important;
 	line-height: 1 !important;
+	-webkit-transform-style: preserve-3d;
+	-webkit-backface-visibility: hidden;
 }
 
 code {
