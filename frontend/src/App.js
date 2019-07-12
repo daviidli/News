@@ -7,9 +7,15 @@ import "shards-ui/dist/css/shards.min.css"
 import Search from './components/Search';
 import Results from './controllers/Results';
 import config from './config/config.json'
+<<<<<<< Updated upstream
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { css } from 'glamor';
+=======
+import googleTrends from 'google-trends-api';
+import HttpsProxyAgent from 'https-proxy-agent';
+
+>>>>>>> Stashed changes
 const SearchContainer = styled.div`
 	height: ${ window.innerHeight.toString() + 'px' };
 	display: flex;
@@ -32,11 +38,15 @@ class App extends React.Component {
 			data: [],
 			waiting: false
 		};
+
+		this.proxyAgent =  new HttpsProxyAgent('http://proxy-host:8888/');
 	}
 
 	search = (search) => {
-		this.setState({ search, searchSmall: search === '', waiting: true });
-		this._runSearch(search);
+		this.setState({ search, searchSmall: search === '', waiting: true, data: [] });
+
+		// this._runSearch(search);
+		this._runTrends(search);
 	}
 
 	_runSearch = (search) => {
@@ -57,6 +67,13 @@ class App extends React.Component {
 
 			this.setState({ data: data, waiting: false });
 		});
+	}
+
+	_runTrends = (search) => {
+		googleTrends.interestOverTime({keyword: search, agent: this.proxyAgent})
+			.then(results => {
+				console.log('These results are awesome', results);
+			});
 	}
 
 	_results = () => {
