@@ -9,7 +9,7 @@ body {
 	line-height: 1 !important;
 	-webkit-transform-style: preserve-3d;
 	-webkit-backface-visibility: hidden;
-	overflow-y: hidden;
+	overflow-x: hidden;
 }
 
 code {
