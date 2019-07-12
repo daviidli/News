@@ -13,34 +13,44 @@ async function everythingContent(phrase){
         if(err){
             throw err;
         }
-        listOfUrls = addUrlList(json);
+        listOfUrls = addUrlSrcList(json);
     });
     return listOfUrls;
 }
 
+
+
 //url into list helper
-function addUrlList(cont){
-    let listUrl=[];
+function addUrlSrcList(cont){
+    let listUrlSrcObj=[];
     cont.articles.forEach(function(element){
-        
-        listUrl.push(element.url);
+        let obj = {
+            'url':element.url,
+            'source':element.source.name
+        }
+        listUrlSrcObj.push(obj);
         
     });
-    listUrl.forEach(function(element){
+    listUrlSrcObj.forEach(function(element){
         
         console.log(element);
-        
     });
-    return listUrl;
+    
+    return listUrlSrcObj;
 }
 
+
+app.get("/vals", jsonParser, async function(request, response){
+let valList = await everythingContent("Brexit");
+});
+
 // get the analysis results
-async function getAnalysis(urls, phrase){
+async function getAnalysis(urlSrc, phrase){
     let analysis = await request.post(
         {
             url:"https://bcd633f7.ngrok.io/analysis", 
             json:true,
-            body:{'urls': urls, 'searchterm':phrase}, 
+            body:{'urls': urlSrc, 'searchterm':phrase}, 
             headers:{'Content-Type': 'application/json'}
             }, function(err, res, json){
             if(err){
