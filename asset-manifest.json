@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/informmii/static/css/main.43f38f78.chunk.css",
-    "main.js": "/informmii/static/js/main.d18df7c3.chunk.js",
-    "main.js.map": "/informmii/static/js/main.d18df7c3.chunk.js.map",
-    "runtime~main.js": "/informmii/static/js/runtime~main.b8522bcc.js",
-    "runtime~main.js.map": "/informmii/static/js/runtime~main.b8522bcc.js.map",
-    "static/css/2.1488d24b.chunk.css": "/informmii/static/css/2.1488d24b.chunk.css",
-    "static/js/2.986c0184.chunk.js": "/informmii/static/js/2.986c0184.chunk.js",
-    "static/js/2.986c0184.chunk.js.map": "/informmii/static/js/2.986c0184.chunk.js.map",
-    "index.html": "/informmii/index.html",
-    "precache-manifest.43b2937b38c466685fcb7bf4bfd8b3bb.js": "/informmii/precache-manifest.43b2937b38c466685fcb7bf4bfd8b3bb.js",
-    "service-worker.js": "/informmii/service-worker.js",
-    "static/css/2.1488d24b.chunk.css.map": "/informmii/static/css/2.1488d24b.chunk.css.map",
-    "static/css/main.43f38f78.chunk.css.map": "/informmii/static/css/main.43f38f78.chunk.css.map",
-    "static/media/logo.svg": "/informmii/static/media/logo.52c3ccde.svg"
+    "main.css": "/News/static/css/main.43f38f78.chunk.css",
+    "main.js": "/News/static/js/main.447f6aea.chunk.js",
+    "main.js.map": "/News/static/js/main.447f6aea.chunk.js.map",
+    "runtime~main.js": "/News/static/js/runtime~main.a19ba134.js",
+    "runtime~main.js.map": "/News/static/js/runtime~main.a19ba134.js.map",
+    "static/css/2.1488d24b.chunk.css": "/News/static/css/2.1488d24b.chunk.css",
+    "static/js/2.4c93fc28.chunk.js": "/News/static/js/2.4c93fc28.chunk.js",
+    "static/js/2.4c93fc28.chunk.js.map": "/News/static/js/2.4c93fc28.chunk.js.map",
+    "index.html": "/News/index.html",
+    "precache-manifest.a9719463aaaa97ffd79394e5d2bd9a9d.js": "/News/precache-manifest.a9719463aaaa97ffd79394e5d2bd9a9d.js",
+    "service-worker.js": "/News/service-worker.js",
+    "static/css/2.1488d24b.chunk.css.map": "/News/static/css/2.1488d24b.chunk.css.map",
+    "static/css/main.43f38f78.chunk.css.map": "/News/static/css/main.43f38f78.chunk.css.map",
+    "static/media/logo.svg": "/News/static/media/logo.52c3ccde.svg"
   }
 }
