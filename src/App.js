@@ -26,13 +26,15 @@ class App extends React.Component {
 
 		this.state = {
 			search: '',
-			searchSmall: true
+			searchSmall: true,
+			data: {}
 		};
 	}
 
 	search = async (search) => {
-		// let res = await axios.post(config['backend-url'], {"search": search})
-		this.setState({ search, searchSmall: search === '' });
+		let res = await axios.post(config['backend-url'] + '/search', {"search": search})
+		console.log(res)
+		this.setState({ search, searchSmall: search === '', data: res.data });
 	}
 
 	_results = () => {
@@ -40,7 +42,7 @@ class App extends React.Component {
 			return null;
 		}
 
-		return <StyledResults />;
+		return <StyledResults data={this.state.data}/>;
 	}
 
 	render() {

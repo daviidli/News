@@ -22,10 +22,26 @@ let request = require('request-promise');
 let bodyParser = require('body-parser');
 let jsonParser = bodyParser.json();
 
+// CORS
+app.use(function(req, res, next) {
+    let origins = ['localhost', "http://localhost:3000", "localhost:3000"]
+
+    if (req.headers.origin) {
+        for (let i = 0; i < origins.length; i++) {
+            let origin = origins[i]
+            if (req.headers.origin.indexOf(origin) > -1) {
+                res.setHeader('Access-Control-Allow-Origin', req.headers.origin)
+            }
+        }
+    }
+
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, id, token, login_uuid')
+    next()
+})
 //helper for getting the request
 async function everythingContent(phrase){ 
     let listOfUrls;
-    let numResults=60;
+    let numResults=10;
     let link = 'https://newsapi.org/v2/everything?q='+ phrase +'&pageSize='+numResults+ '&apiKey=f4c9cef82d2745cf955c392b9e6284c1'
     await request({url:link, json:true}, function(err, res, json){
         if(err){
@@ -89,7 +105,10 @@ app.post("/search", jsonParser, async function(request, response){
     }
     let phrase = request.body.search;
     let valList = await everythingContent(phrase);
-    response.send(getAnalysis(valList,phrase));
+    let analysis = await getAnalysis(valList,phrase);
+    console.log("ANALYSIS")
+    console.log(analysis)
+    return response.send(analysis);
 });
 
 app.use(log4js.connectLogger(logger, { level: logger.level }));
