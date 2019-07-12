@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import styled from 'styled-components';
-import axios from 'axios'
+import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
 import Search from './components/Search';
@@ -27,7 +27,8 @@ class App extends React.Component {
 		this.state = {
 			search: '',
 			searchSmall: true,
-			data: {}
+			data: [],
+			waiting: true
 		};
 	}
 
@@ -42,7 +43,7 @@ class App extends React.Component {
 			return null;
 		}
 
-		return <Results data={this.state.data}/>;
+		return <Results data={this.state.data} waiting={this.state.waiting} />;
 	}
 
 	render() {

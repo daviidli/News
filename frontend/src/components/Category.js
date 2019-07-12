@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Card, CardHeader, CardBody, CardFooter, CardTitle, Button, ButtonGroup, Collapse } from 'shards-react';
 import Article from './Article';
 import colors from '../colors';
+import ContentLoader from "react-content-loader";
 import ReactDOM from 'react-dom';
 
 const StyledCard = styled(Card)`
@@ -110,8 +111,50 @@ class Category extends React.Component {
 		this.setState({ collapse: !this.state.collapse });
 	}
 
+	_renderContent = () => {
+		const { items, selected } = this.props;
+
+		return items.map(item => {
+			return (
+				<Article
+					footer={items.length}
+					key={item.headline}
+					item={item}
+					selected={item.headline === selected}
+					id={item.headline}
+				/>
+			);
+		});
+	}
+
+	_renderLoader = () => {
+		return (
+			<ContentLoader
+				height={370}
+				width={400}
+				speed={2}
+				primaryColor="rgba(255, 255, 255, 0.4)"
+				secondaryColor="rgba(190, 190, 190, 0.2)"
+			>
+				<rect x="16" y="13" rx="4" ry="4" width="256" height="13" /> 
+				<rect x="0" y="70" rx="5" ry="5" width="400" height="208" /> 
+				<rect x="17" y="40" rx="4" ry="4" width="175" height="13" /> 
+				<rect x="30" y="302" rx="8" ry="8" width="121" height="40" /> 
+				<circle cx="338" cy="321" r="31" />
+			</ContentLoader>
+		);
+	}
+
+	_renderCardContent = () => {
+		if (this.props.waiting) {
+			return this._renderLoader();
+		} else {
+			return this._renderContent();
+		}
+	}
+
 	render() {
-		const { className, header, items, selected } = this.props;
+		const { className, header, items } = this.props;
 
 		const articleFooter = items.length === 1 ? ' article' : ' articles';
 
@@ -119,19 +162,7 @@ class Category extends React.Component {
 			<StyledCard className={className}>
 				<StyledCardHeader category={header}><b>{ header }</b></StyledCardHeader>
 				<StyledCardBody category={header} id={'scroller-' + header}>
-					{
-						items.map(item => {
-							return (
-								<Article
-									footer={items.length}
-									key={item.headline}
-									item={item}
-									selected={item.headline === selected}
-									id={item.headline}
-								/>
-							);
-						})
-					}
+					{ this._renderCardContent() }
 				</StyledCardBody>
 				<StyledFooter>{ items.length + articleFooter }</StyledFooter>
 			</StyledCard>
