@@ -1,5 +1,5 @@
 Flask==1.0.2
-Flask-Cors==3.0.6
+Flask-Cors==3.0.9
 newspaper3k==0.2.8
 nltk==3.2.5
 scikit-learn==0.19.1
